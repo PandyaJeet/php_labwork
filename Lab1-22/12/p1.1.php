@@ -7,8 +7,4 @@
     echo "Subtraction : ","$a-$b","<br>";
     echo "Multiplication : ","$a*$b","<br>";
     echo "Division : ","$a/$b";
-    
-    a = a + b; 
-    b = a - b; 
-    a = a - b;
 ?>
