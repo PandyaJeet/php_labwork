@@ -1,16 +1,17 @@
 <?php
-    $x = 3;
-    $temp = 1 - $x;
-    $tem = 0;
-    $fact=1;
-    for ($i = 2; $i <= $x;$i++){
-        $fact=1;
-        for ($j=$i;$j>0;$j--){
-            $fact*=$j;
-        }
-        if ($i%2 == 0)        $temp += (pow($x,$i)/$fact); 
-        else $temp -= (pow($x,$i)/$fact);
+$x = 3;
+$temp = 1 - $x;
+
+for ($i = 2; $i <= 5; $i++) {
+    $fact = 1;
+    for ($j = 1; $j <= $i; $j++) {
+        $fact *= $j;
     }
-    
-    print($temp);
+    if ($i % 2 == 0)
+        $temp += pow($x, $i) / $fact;
+    else
+        $temp -= pow($x, $i) / $fact;
+}
+
+echo $temp;
 ?>
