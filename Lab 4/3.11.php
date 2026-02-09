@@ -1,23 +1,27 @@
 <?php
-    $num = 10;
-    $n = $num;
-    #include <stdio.h>
-    int n, binary[32], i = 0;
-    while (n > 0) {
-        binary[i] = n % 2;
-        n = n / 2;
-        i++;
+    main();
+    function main(){
+        decimal();
+        bin();
+        hexa();
     }
-    for(;n>0;n=n/2){
-        $a[$i++] =  n%2;
-
+    function decimal(){
+        $num = 100;
+        print("Binary Number : ".$num);
+        print("<br>Decimal to Binary ".decbin($num));
+        print("<br>Decimal to Octal ".decoct($num));
+        print("<br>Decimal to Hexadecimal ".dechex($num));
     }
-
-    printf("Binary: ");
-    for (int j = i - 1; j >= 0; j--) {
-        printf("%d", binary[j]);
+    function bin(){        
+        $num = 100;
+        print("Binary Number : ".$num);
+        print("<br>Binary to Decimal ".bindec($num));
+        print("<br>Binary to Hexadecimal ".bin2hex($num));
     }
-
-    return 0;
-
+    function hexa(){
+    $num = "1ae2";
+    print("Hexadecimal Number : ".$num);
+    print("<br>Hexadecimal to Binary ". hex2bin($num));
+    print("<br>Hexadecimal to Decimal ".hexdec($num));
+    }
 ?>
