@@ -1,5 +1,5 @@
 <?php
-    //sum,pow,prime,max,min,factors,factorial,space,sort_array,series
+    //sum,pow,prime,max,min,factors,factorial,sort_array,series
     function main(){
         $a = 17;
         $b = 4;
@@ -11,8 +11,22 @@
         prime($a);
         print("<br>Factorial of B : ". factorial($b));
         sort_array($arr);
-        
+        fibo($b);
     }
+    function fibo($b){       
+        $n = $b;
+        $a = 1;
+        $b = 1;
+        echo $a . " " . $b . " ";
+        for ($i = 3; $i <= $n; $i++) {
+            $c = $a + $b;
+            echo $c . " ";
+            $a = $b;
+            $b = $c;
+        }
+    }
+
+
     function sort_array ($arr){
         $t=0;
         $n = sizeof($arr);
