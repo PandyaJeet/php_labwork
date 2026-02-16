@@ -27,12 +27,13 @@ Display in tabular format
         </tr>
         <tr>
             <td>Hobbies : </td>
-            <td><input type="checkbox" name="chkhobbies" value="Cricket"><label for="Cricket">Cricket
-                <input type="checkbox" name="chkhobbies" value="Football"><label for="Football">Football
-                <input type="checkbox" name="chkhobbies" value="Chess"><label for="Chess">Chess
-                <input type="checkbox" name="chkhobbies" value="Hockey"><label for="Hockey">Hockey
-                <input type="checkbox" name="chkhobbies" value="VolleyBall"><label for="VolleyBall">VolleyBall
-            </td> 
+            <td>
+                <input type="checkbox" name="chkhobbies[]" value="Cricket"> Cricket
+                <input type="checkbox" name="chkhobbies[]" value="Football"> Football
+                <input type="checkbox" name="chkhobbies[]" value="Chess"> Chess
+                <input type="checkbox" name="chkhobbies[]" value="Hockey"> Hockey
+                <input type="checkbox" name="chkhobbies[]" value="VolleyBall"> VolleyBall
+            </td>
         </tr>    
         <tr>
             <td>City : </td>
@@ -65,17 +66,20 @@ Display in tabular format
     if (isset($_POST["btnsubmit"])){
         $name = $_POST["txtname"];
         $gender = $_POST["radgender"];
-        $hobbies = $_POST["chkhobbies"];
+      //  $hobbies = $_POST["chkhobbies"];
         $city = $_POST["selcity"];
         $pin = $_POST["txtpincode"];
         $contact = $_POST["txtcontact"];
-        print ("Entered Name: ". $name."<br>");    
+         print ("Entered Name: ". $name."<br>");    
         print ("Entered Gender : ". $gender."<br>"); 
         //print("Entered hobbies : ". $hobbies. "<br>");
         //echo implode(',', $hobbies);
-        print("Entered City : ". $city. "<br>");
+        print("Entered Hobbies : ");
+        foreach ($_POST["chkhobbies"] as $hobby){
+            print ($hobby . " ");
+        }
+        print("<br>Entered City : ". $city. "<br>");
         print("Entered pincode : ". $pin. "<br>");
         print("Entered contact no. : ". $contact. "<br>");
-    
     }
 ?>  
