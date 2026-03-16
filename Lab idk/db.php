@@ -14,5 +14,11 @@
             $stmt->bindParam(':ct',$city);
             $stmt->execute();
         }
+        function viewUser(){
+            $q = "SELECT * FROM hello";
+            $stmt = $this->con->prepare($q);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
     }
 ?>
