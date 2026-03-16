@@ -1,3 +1,7 @@
+<?php
+    require 'db.php';
+    $o = new db();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,9 +20,8 @@
 </body>
 </html>
 <?php
-    if (isset($_POST['bsubmit'])){
+    if (isset($_POST['bsubmit'] )){
         $name = $_POST['tname'];
         $city = $_POST['tcity'];
-        print($name. " is from " . $city.'<br>');
     }
 ?>
