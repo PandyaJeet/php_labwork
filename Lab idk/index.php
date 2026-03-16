@@ -23,5 +23,7 @@
     if (isset($_POST['bsubmit'] )){
         $name = $_POST['tname'];
         $city = $_POST['tcity'];
+        $o->addUser($name,$city);
     }
+
 ?>
