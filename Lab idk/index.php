@@ -15,3 +15,10 @@
     </center>
 </body>
 </html>
+<?php
+    if (isset($_POST['bsubmit'])){
+        $name = $_POST['tname'];
+        $city = $_POST['tcity'];
+        print($name. " is from " . $city.'<br>');
+    }
+?>
