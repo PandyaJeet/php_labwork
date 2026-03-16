@@ -2,7 +2,7 @@
     require 'db.php';
     $o = new db();
     $users = $o->viewUser();
-    
+
     //print_r($users);
 ?>
 <!DOCTYPE html>
@@ -50,6 +50,12 @@
         $name = $_POST['tname'];
         $city = $_POST['tcity'];
         $o->addUser($name,$city);
+        header("Location:index.php");
+    }
+    if (isset($_GET['del'])){
+        $id=$_GET['del'];    
+        $o->deleteUser($id);
+        header("Location:index.php");
     }
 
 ?>
