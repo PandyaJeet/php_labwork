@@ -20,5 +20,12 @@
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
+        function deleteUser($id){
+            $q = "DELETE FROM hello where id=(:id)";
+            $stmt = $this->con->prepare($q);
+            $stmt->bindParam(':id',$id);
+            $stmt->execute();
+            
+        }
     }
 ?>
