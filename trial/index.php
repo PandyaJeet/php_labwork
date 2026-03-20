@@ -1,8 +1,7 @@
 /*
     MySQL db with 4 fields id, with auto increment, name, email and dept. 
     Data has been passed
-*/
-<?php
+*/<?php
     class db{
         private $con;
         function __construct(){
@@ -19,8 +18,15 @@
             $stmt->bindParam(':dp',$dept);
             $stmt->execute();
         }
+        function viewUser(){
+            $a="SELECT * FROM hello";
+            $stmt = $this->con->prepare($a);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
     }
     $o = new db();
+    $users=$o->viewUser();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,6 +45,28 @@
         <input type="text" name="txtdept" id="">
         <input type="submit" value="Submit" name="btnsubmit" id="">
     </form>
+    <table border='1'>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Department</th>
+            </tr>
+            <tr>
+              <?php
+                foreach ($users as $user){
+                ?>
+                <tr>
+                    <td><?php print($user['id']);?></td>
+                    <td><?php print($user['name']);?></td>
+                    <td><?php print($user['email']);?></td>
+                    <td><?php print($user['dept']);?></td>
+                </tr>
+                <?php
+                }
+              ?>  
+            </tr>
+        </table>  
 </body>
 </html>
 <?php
