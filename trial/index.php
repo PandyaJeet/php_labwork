@@ -1,32 +1,33 @@
-/*
-    MySQL db with 4 fields id, with auto increment, name, email and dept. 
-    Data has been passed
-*/<?php
+<?php
     class db{
         private $con;
         function __construct(){
             $dsn="mysql:host=localhost;dbname=hello";
             $usn="root";
-            $pass = "";
-            $this->con = new PDO($dsn,$usn,$pass);
+            $pass="";
+            $this->con = new PDO ($dsn,$usn,$pass);
         }
-        function addUser($name,$email,$dept){
-            $q = "INSERT INTO hello (name,email,dept) VALUE (:nm,:em,:dp)";
-            $stmt = $this->con->prepare($q);
-            $stmt->bindParam(':nm',$name);
-            $stmt->bindParam(':em',$email);
-            $stmt->bindParam(':dp',$dept);
+        function addUsers($name){
+            $p = "INSERT INTO hello (name) VALUES (:nm)";
+            $stmt = $this->con->prepare($p);
+            $stmt->bindParam(":nm",$name);
             $stmt->execute();
         }
-        function viewUser(){
-            $a="SELECT * FROM hello";
-            $stmt = $this->con->prepare($a);
+        function display(){
+            $p = "SELECT * FROM hello";
+            $stmt = $this->con->prepare($p);
             $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetchALL(PDO::FETCH_ASSOC);
+        }
+        function delete($id){
+            $p="DELETE FROM hello WHERE id=(:id)";
+            $stmt=$this->con->prepare($p);
+            $stmt->bindParam(":id",$id);
+            $stmt->execute();
         }
     }
     $o = new db();
-    $users=$o->viewUser();
+    $users = $o->display();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,44 +37,43 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="" method="POST">
-        Name:<br>
-        <input type="text" name="txtname" id="">
-        Email:<br>
-        <input type="email" name="email" id="">
-        Department:<br>
-        <input type="text" name="txtdept" id="">
-        <input type="submit" value="Submit" name="btnsubmit" id="">
-    </form>
-    <table border='1'>
+    <center>
+        <table>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Department</th>
+                <form action="" method="POST"> 
+                <td>
+                    Name
+                </td>
+                <td><input type="text" name="txtname"></td>
+                <td colspan="2"><input type="submit" name="btnsubmit"></td>    
+            </form>
             </tr>
-            <tr>
-              <?php
+            <?php
                 foreach ($users as $user){
-                ?>
-                <tr>
-                    <td><?php print($user['id']);?></td>
-                    <td><?php print($user['name']);?></td>
-                    <td><?php print($user['email']);?></td>
-                    <td><?php print($user['dept']);?></td>
-                </tr>
-                <?php
+                    ?>
+                    <tr>
+                        <td><?php echo($user['id']);?></td>
+                        <td><?php echo($user['name']);?></td>
+                        <td><a href="h.php?del=<?php echo $user['id'] ?>">Delete</a></td>
+                    </tr>
+                    <?php
                 }
-              ?>  
-            </tr>
-        </table>  
+            ?>
+        </table>
+    </center>
 </body>
 </html>
 <?php
     if (isset($_POST['btnsubmit'])){
         $name=$_POST['txtname'];
-        $email=$_POST['email'];
-        $dept=$_POST['txtdept'];
-        $o->addUser($name,$email,$dept);
+        $o->addUsers($name);
+        header("Location:h.php");
+        exit();
+    }
+    if(isset($_GET['del'])){
+        $id =$_GET['del'];
+        $o->delete($id);
+        header("Location:h.php");
+        exit();        
     }
 ?>
