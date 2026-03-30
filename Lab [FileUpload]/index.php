@@ -1,3 +1,17 @@
+<?php
+    class db{
+        private $con;
+        function __construct(){
+            $dsn = "mysql:host=localhost;dbname=hello;";
+            $usn = "root";
+            $pass = "";
+            $this->con=new PDO ($dsn,$usn,$pass);
+        }
+        function UploadImg($path){
+        }
+    }
+    $obj = new db();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +29,7 @@
 <?php
     if(isset($_POST['btnupload'])){
         if($_SERVER['REQUEST_METHOD']==='POST' && isset($_FILES['file'])){
-            print("Image Uploaded Successfully");
+            $obj->UploadImg($_FILES['file']);
         }
     }
 ?>
