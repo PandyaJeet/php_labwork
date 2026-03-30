@@ -7,8 +7,23 @@
             $pass = "";
             $this->con=new PDO ($dsn,$usn,$pass);
         }
-        function UploadImg($path){
+        function UploadImg($file){
+            $p = "INSERT INTO img_db (path) VALUES (:pth)";
+            $stmt = $this->con->prepare($p);
+            $stmt->bindParam(":pth",$file['']);
+            $stmt->execute();
         }
+
+        function UploadFile($file){
+            $filename = $file['name'];
+            $fileTmpPath = $file['tmp_name'];
+            $dir = "uploads/";
+            if (!is_dir($dir)){
+                mkdir($dir,0777,true);
+            }
+            $path = $dir . basename($filename);
+        }
+
     }
     $obj = new db();
 ?>
@@ -29,7 +44,7 @@
 <?php
     if(isset($_POST['btnupload'])){
         if($_SERVER['REQUEST_METHOD']==='POST' && isset($_FILES['file'])){
-            $obj->UploadImg($_FILES['file']);
+            $obj->UploadFile($_FILES['file']);
         }
     }
 ?>
